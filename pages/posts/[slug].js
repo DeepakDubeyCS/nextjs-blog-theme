@@ -113,14 +113,18 @@ export const getStaticProps = async ({ params }) => {
   const prevPost = getPreviousPostBySlug(params.slug);
   const nextPost = getNextPostBySlug(params.slug);
 
+  // Handle undefined cases
+  const prevPostData = prevPost ? prevPost : null;
+  const nextPostData = nextPost ? nextPost : null;
+
   return {
     props: {
       globalData,
       source: mdxSource,
       frontMatter: data,
       slug: params.slug,
-      prevPost,
-      nextPost,
+      prevPost: prevPostData, // Assign null if undefined
+      nextPost: nextPostData, // Assign null if undefined
     },
   };
 };
